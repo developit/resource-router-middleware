@@ -1,21 +1,21 @@
 {
-  "name": "resource-router",
+  "name": "resource-router-middleware",
   "version": "0.1.0",
   "description": "Express REST resources as middleware",
-  "main": "resource-router.js",
+  "main": "resource-router-middleware.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/developit/resource-router.git"
+    "url": "https://github.com/developit/resource-router-middleware.git"
   },
   "author": "Jason Miller <jason@developit.ca>",
   "license": "BSD 3-Clause",
   "bugs": {
-    "url": "https://github.com/developit/resource-router/issues"
+    "url": "https://github.com/developit/resource-router-middleware/issues"
   },
-  "homepage": "https://github.com/developit/resource-router",
+  "homepage": "https://github.com/developit/resource-router-middleware",
   "peerDependencies": {
     "express": "^4.12.2"
   }

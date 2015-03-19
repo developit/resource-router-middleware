@@ -20,7 +20,7 @@ module.exports = function ResourceRouter(route) {
 
 	for (key in route) {
 		if (typeof router[key]==='function') {
-			url = ~keyed.indexOf(key) ? `/:${route.id}` : '/';
+			url = ~keyed.indexOf(key) ? ('/:'+route.id) : '/';
 			router[key](url, route[key]);
 		}
 	}

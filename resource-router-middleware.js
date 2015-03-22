@@ -5,7 +5,7 @@ var keyed = ['get', 'put', 'patch', 'delete', 'del'],
 
 module.exports = function ResourceRouter(route) {
 	var router = Router(),
-		key, url;
+		key, fn, url;
 
 	[].concat(route.middleware || []).forEach(router.use.bind(router));
 
@@ -20,9 +20,10 @@ module.exports = function ResourceRouter(route) {
 	}
 
 	for (key in route) {
-		if (typeof router[key]==='function') {
+		fn = map[key] || key;
+		if (typeof router[fn]==='function') {
 			url = ~keyed.indexOf(key) ? ('/:'+route.id) : '/';
-			router[map[key] || key](url, route[key]);
+			router[fn](url, route[key]);
 		}
 	}
 

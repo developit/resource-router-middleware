@@ -7,54 +7,6 @@ resource-router-middleware
 Usage
 =====
 
-In ES6
-------
-
-```js
-import resource from 'resource-router-middleware';
-
-export default resource({
-	id : 'user',
-
-	load(req, id, callback) {
-		var user = users.find( user => user.id===id ),
-			err = user ? null : 'Not found';
-		callback(err, user);
-	},
-
-	list({ params }, res) {
-		res.json(users);
-	},
-
-	create({ body }, res) {
-		body.id = users.length.toString(36);
-		users.push(body);
-		res.json(body);
-	},
-
-	read({ params }, res) {
-		res.json(req.user);
-	},
-
-	update({ user, body }, res) {
-		for (let key in body) {
-			if (key!=='id') {
-				user[key] = body[key];
-			}
-		}
-		res.status(204).send();
-	},
-
-	delete({ user }, res) {
-		users.splice(users.indexOf(user), 1);
-		res.status(204).send();
-	}
-});
-```
-
-
----
-
 
 In ES5
 ------
@@ -95,7 +47,7 @@ module.exports = resource({
 	},
 
 	/** GET /:id - Return a given entity */
-	read : function(req.params, res) {
+	read : function(req, res) {
 		res.json(req.user);
 	},
 
@@ -125,6 +77,52 @@ module.exports = resource({
 		}
 
 		res.status(404).send('Not found');
+	}
+});
+```
+
+
+In ES6
+------
+
+```js
+import resource from 'resource-router-middleware';
+
+export default resource({
+	id : 'user',
+
+	load(req, id, callback) {
+		var user = users.find( user => user.id===id ),
+			err = user ? null : 'Not found';
+		callback(err, user);
+	},
+
+	list({ params }, res) {
+		res.json(users);
+	},
+
+	create({ body }, res) {
+		body.id = users.length.toString(36);
+		users.push(body);
+		res.json(body);
+	},
+
+	read({ user }, res) {
+		res.json(user);
+	},
+
+	update({ user, body }, res) {
+		for (let key in body) {
+			if (key!=='id') {
+				user[key] = body[key];
+			}
+		}
+		res.status(204).send();
+	},
+
+	delete({ user }, res) {
+		users.splice(users.indexOf(user), 1);
+		res.status(204).send();
 	}
 });
 ```

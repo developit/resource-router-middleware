@@ -7,7 +7,7 @@ module.exports = function ResourceRouter(route) {
 	var router = Router(),
 		key, fn, url;
 
-	[].concat(route.middleware || []).forEach(router.use.bind(router));
+	if (route.middleware) router.use(route.middleware);
 
 	if (route.load) {
 		router.param(route.id, function(req, res, next, id) {

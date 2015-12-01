@@ -1,17 +1,60 @@
-resource-router-middleware
-==========================
+# resource-router-middleware
 
-[![Join the chat at https://gitter.im/developit/resource-router-middleware](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/developit/resource-router-middleware?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![NPM](http://img.shields.io/npm/v/resource-router-middleware.svg)](https://www.npmjs.com/package/resource-router-middleware)
+[![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/developit/resource-router-middleware)
 
 > Express REST resources as middleware, mountable anywhere.
 
 
-Usage
-=====
+## Usage
 
 
-In ES5
-------
+### In ES6
+
+```js
+import resource from 'resource-router-middleware';
+
+export default resource({
+	id : 'user',
+
+	load(req, id, callback) {
+		var user = users.find( user => user.id===id ),
+			err = user ? null : 'Not found';
+		callback(err, user);
+	},
+
+	list({ params }, res) {
+		res.json(users);
+	},
+
+	create({ body }, res) {
+		body.id = users.length.toString(36);
+		users.push(body);
+		res.json(body);
+	},
+
+	read({ user }, res) {
+		res.json(user);
+	},
+
+	update({ user, body }, res) {
+		for (let key in body) {
+			if (key!=='id') {
+				user[key] = body[key];
+			}
+		}
+		res.status(204).send();
+	},
+
+	delete({ user }, res) {
+		users.splice(users.indexOf(user), 1);
+		res.status(204).send();
+	}
+});
+```
+
+
+### In ES5
 
 ```js
 var resource = require('resource-router-middleware');
@@ -79,52 +122,6 @@ module.exports = resource({
 		}
 
 		res.status(404).send('Not found');
-	}
-});
-```
-
-
-In ES6
-------
-
-```js
-import resource from 'resource-router-middleware';
-
-export default resource({
-	id : 'user',
-
-	load(req, id, callback) {
-		var user = users.find( user => user.id===id ),
-			err = user ? null : 'Not found';
-		callback(err, user);
-	},
-
-	list({ params }, res) {
-		res.json(users);
-	},
-
-	create({ body }, res) {
-		body.id = users.length.toString(36);
-		users.push(body);
-		res.json(body);
-	},
-
-	read({ user }, res) {
-		res.json(user);
-	},
-
-	update({ user, body }, res) {
-		for (let key in body) {
-			if (key!=='id') {
-				user[key] = body[key];
-			}
-		}
-		res.status(204).send();
-	},
-
-	delete({ user }, res) {
-		users.splice(users.indexOf(user), 1);
-		res.status(204).send();
 	}
 });
 ```

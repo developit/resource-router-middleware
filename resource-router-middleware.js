@@ -3,9 +3,9 @@ var Router = require('express').Router;
 var keyed = ['get', 'read', 'put', 'patch', 'update', 'del', 'delete'],
 	map = { index:'get', list:'get', read:'get', create:'post', update:'put', modify:'patch' };
 
-module.exports = function ResourceRouter(route,mergeParams) {
-	mergeParams = mergeParams ? true : false;
-	var router = Router({mergeParams: mergeParams}),
+module.exports = function ResourceRouter(route) {
+	route.mergeParams = route.mergeParams ? true : false;
+	var router = Router({mergeParams: route.mergeParams}),
 		key, fn, url;
 
 	if (route.middleware) router.use(route.middleware);

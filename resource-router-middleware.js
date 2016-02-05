@@ -4,7 +4,8 @@ var keyed = ['get', 'read', 'put', 'patch', 'update', 'del', 'delete'],
 	map = { index:'get', list:'get', read:'get', create:'post', update:'put', modify:'patch' };
 
 module.exports = function ResourceRouter(route) {
-	var router = Router(),
+	route.mergeParams = route.mergeParams ? true : false;
+	var router = Router({mergeParams: route.mergeParams}),
 		key, fn, url;
 
 	if (route.middleware) router.use(route.middleware);

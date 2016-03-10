@@ -15,6 +15,9 @@
 import resource from 'resource-router-middleware';
 
 export default resource({
+	
+	mergeParams: true,
+	
 	id : 'user',
 
 	load(req, id, callback) {
@@ -62,6 +65,9 @@ var resource = require('resource-router-middleware');
 var users = [];
 
 module.exports = resource({
+	
+	mergeParams: true,
+	
 	/** Property name to store preloaded entity on `request`. */
 	id : 'user',
 

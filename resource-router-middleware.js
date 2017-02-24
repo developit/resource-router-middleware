@@ -1,6 +1,6 @@
 var Router = require('express').Router;
 
-var keyed = ['get', 'read', 'put', 'patch', 'update', 'del', 'delete'],
+var keyed = ['get', 'read', 'put', 'update', 'patch', 'modify', 'del', 'delete'],
 	map = { index:'get', list:'get', read:'get', create:'post', update:'put', modify:'patch' };
 
 module.exports = function ResourceRouter(route) {

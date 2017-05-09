@@ -1,5 +1,7 @@
 # resource-router-middleware
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/developit/resource-router-middleware.svg)](https://greenkeeper.io/)
+
 [![NPM](http://img.shields.io/npm/v/resource-router-middleware.svg)](https://www.npmjs.com/package/resource-router-middleware)
 [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/developit/resource-router-middleware)
 
